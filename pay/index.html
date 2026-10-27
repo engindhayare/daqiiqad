@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Bixi · Daqiiqad</title>
+<meta name="description" content="Garaac code-ka lacag bixinta Daqiiqad.">
+<meta property="og:title" content="Bixi · Daqiiqad">
+<meta property="og:description" content="Garaac code-ka lacag bixinta Daqiiqad.">
+<meta property="og:image" content="../assets/share.png">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Nunito+Sans:opsz,wght@6..12,400;6..12,700;6..12,800&display=swap">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body class="daq">
+<header class="top"><div class="wrap"><a href="../biriir/" aria-label="Biriir"><img src="../assets/biriir-logo-green.svg" alt="Biriir" width="69" height="44"></a><nav><a href="../">Daqiiqad</a><a href="../biriir/">Biriir</a><a href="../privacy/">Privacy</a><a href="../data-deletion/">Data deletion</a></nav></div></header>
+<main class="wrap doc" style="text-align:center">
+<h1>Bixi lacagta</h1>
+<p class="muted" id="pay-hint">Riix badhanka si telefoonku u furo code-ka.</p>
+<p id="pay-code" style="font:800 1.6rem/1.3 ui-monospace,Menlo,monospace;word-break:break-all;margin:28px 0">—</p>
+<p style="display:flex;flex-direction:column;gap:12px;align-items:center">
+  <a class="btn" id="pay-dial" href="#" hidden>📞 Garaac hadda</a>
+  <button class="btn light" id="pay-copy" type="button" style="border:1px solid var(--line);cursor:pointer;font:inherit;font-weight:800" hidden>Koobiyee code-ka</button>
+</p>
+<p class="muted" style="margin-top:28px">iPhone: koobiyee code-ka, fur dialer-ka, ku dheji, kadibna garaac.<br>Kadib ku noqo WhatsApp oo riix <b>Waan bixiyay</b>.</p>
+</main>
+<script>
+(function () {
+  var code = new URLSearchParams(location.search).get("u") || "";
+  // Only Sahal (*884*, *883*) and eDahab (*113*, *110*) payment codes are accepted.
+  var ok = /^\*(884|883|113|110)\*\d{3,15}\*\d{1,5}\*\d{1,2}#$/.test(code);
+  var el = document.getElementById("pay-code");
+  if (!ok) { el.textContent = "Code-kan sax ma aha."; document.getElementById("pay-hint").textContent = "Ku noqo WhatsApp oo isticmaal code-ka fariinta ku jira."; return; }
+  el.textContent = code;
+  var dial = document.getElementById("pay-dial");
+  dial.href = "tel:" + code.replace(/#/g, "%23");
+  dial.hidden = false;
+  var copy = document.getElementById("pay-copy");
+  copy.hidden = false;
+  copy.addEventListener("click", function () {
+    var done = function () { copy.textContent = "✅ Waa la koobiyeeyay"; };
+    if (navigator.clipboard) navigator.clipboard.writeText(code).then(done, function () {});
+    else { var r = document.createRange(); r.selectNodeContents(el); var s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+  });
+})();
+</script>
+<footer><div class="wrap"><span>© 2026 Biriir · Garowe, Puntland, Somalia</span><span>WhatsApp <a href="https://wa.me/17119969195">+1 711 996 9195</a> · <a href="../privacy/">Privacy</a> · <a href="../data-deletion/">Data deletion</a></span></div></footer>
+</body>
+</html>

@@ -1,5 +1,5 @@
 :root{--green:#00BF63;--deep:#007A3D;--ink:#0B2A1B;--muted:#4E6658;--mist:#E6F6EC;--line:#D6E4DA;--bg:#F3F7F4;--white:#fff}
-*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}[hidden]{display:none!important}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.65 "Nunito Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
 h1,h2,h3{font-family:Nunito,"Arial Rounded MT Bold",system-ui,sans-serif;line-height:1.15;text-wrap:balance;margin:0}
 a{color:var(--deep)}
